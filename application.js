@@ -9,7 +9,6 @@ app.configure(function(){
     app.use(app.router);
 
 	app.set("view engine", "html");
-	app.set("view options", {layout: false});
 	app.register(".html", require("jqtpl").express);
 	
 	app.use(express.static(__dirname + '/public'));
@@ -18,5 +17,6 @@ app.configure(function(){
 
 
 app.get('/', controller.home);
+
 
 app.listen(9001);
