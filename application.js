@@ -17,6 +17,7 @@ app.configure(function(){
 
 
 app.get('/', controller.home);
-
+app.get('/create', controller.createPost);
+app.post('/create', controller.postCreatePost);
 
 app.listen(9001);

@@ -15,9 +15,18 @@
 		font-weight:100;
 	}
 	
+	.content h2 {
+		font-weight:100;
+		font-size:2.5em;
+	}
+	
 	.content h3 {
 		font-weight:100;
 		font-size:1.75em;
+	}
+	
+	input[type=text], .label {
+		font-size:1.25em;
 	}
 
 /******** Global ********/
@@ -99,6 +108,10 @@ body {
 		color: #ff3333;
 		text-decoration: underline;
 	}
+	
+	.content h2 {
+		margin:0;
+	}
 
 	.content h3 {
 		padding: .1em .25em;
@@ -107,4 +120,29 @@ body {
 		border-radius: 5px;
 		background-color:#141a35;
 		color:#ffffff;
+	}
+	
+/******** Form ********/
+
+table {
+	width: 100%;
+}
+
+	textarea, input[type=text]{
+		width:100%;
+	}
+	
+	textarea {
+		height:20em;
+	}
+
+	td {
+		vertical-align: top;
+		padding: 1em 0;
+	}
+
+	.label {
+		padding-right: 1em;
+		text-align:right;
+		width:1px;
 	}

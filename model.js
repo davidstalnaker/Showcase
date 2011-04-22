@@ -13,10 +13,15 @@ module.exports = function(server, port) {
 	
 	return {
 		getPosts: function(callback) {
-			db.collection('posts', function(err, coll) {
-				coll.find(function(err, cursor) {
+			db.collection('posts', function(err, collection) {
+				collection.find(function(err, cursor) {
 					cursor.toArray(callback);
 				});
+			});
+		},
+		createPost: function(post) {
+			db.collection('posts', function(err, collection) {
+				collection.insert([post]);
 			});
 		}
 	};
