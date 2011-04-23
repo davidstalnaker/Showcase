@@ -11,9 +11,20 @@ module.exports = function(model) {
 		postCreatePost: function(req, res) {
 			model.createPost({
 				"title": req.body.title,
-				"content": req.body.content
+				"content": req.body.content,
+				"date": new Date()
 			});
 			res.redirect('/');
+		},
+		viewPost: function(req, res, next) {
+			model.getPost(req.params.slug, function(err, post) {
+				if(post){
+					res.render('viewPost', {post: post});
+				}
+				else {
+					next();
+				}
+			});
 		}
 	};
 }

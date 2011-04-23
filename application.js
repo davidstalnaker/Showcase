@@ -1,6 +1,7 @@
 var express = require('express');
 var model = require('./model.js')('localhost');
 var controller = require('./controller.js')(model);
+require('./dateFormat.js');
 var app = express.createServer();
 
 app.configure(function(){
@@ -19,5 +20,6 @@ app.configure(function(){
 app.get('/', controller.home);
 app.get('/create', controller.createPost);
 app.post('/create', controller.postCreatePost);
+app.get('/view/:slug', controller.viewPost);
 
 app.listen(9001);
