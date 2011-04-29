@@ -18,6 +18,7 @@ app.configure(function(){
 });
 
 app.get('/', controller.home);
+app.get('/manage', controller.manage);
 app.get('/create', controller.createPost);
 app.post('/create', controller.postCreatePost);
 app.get('/view/:slug', controller.viewPost);

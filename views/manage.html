@@ -1,0 +1,8 @@
+<h2>Edit Posts</h2>
+<ul>
+{{each(i, post) posts}}
+	<li><a href="edit/${post.slug}">${post.title}</a></li>
+{{/each}}
+</ul>
+<h2>Other Functions</h2>
+<a href="./create">Create new post</a>

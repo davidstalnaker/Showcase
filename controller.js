@@ -31,6 +31,11 @@ module.exports = function(model) {
 					next();
 				}
 			});
+		},
+		manage: function(req, res) {
+			model.getPosts(function(err, posts) {
+				res.render('manage', { posts: posts });
+			});
 		}
 	};
 }
