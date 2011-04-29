@@ -93,6 +93,16 @@ module.exports = function(server, port) {
 				}
 			);
 		},
+		deletePost: function(slug) {
+			step(
+				function() {
+					db.collection('posts',	this);
+				},
+				function(err, collection) {
+					collection.remove({'slug': slug}, this);
+				}
+			);
+		},
 		getPost: function(slug, callback) {
 			step(
 				function() {

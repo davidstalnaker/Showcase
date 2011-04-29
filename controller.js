@@ -23,6 +23,16 @@ module.exports = function(model) {
 				}
 			});
 		},
+		deletePost: function(req, res, next) {
+			model.getPost(req.params.slug, function(err, post) {
+				if(post){
+					res.render('deletePost', {post: post});
+				}
+				else {
+					next();
+				}
+			});
+		},
 		viewPost: function(req, res, next) {
 			model.getPost(req.params.slug, function(err, post) {
 				if(post){
@@ -57,6 +67,10 @@ module.exports = function(model) {
 				}
 				res.redirect('/');
 			},
+			deletePost: function(req, res) {
+				model.deletePost(req.params.slug);
+				res.redirect('/');
+			}
 		}
 	};
 }
