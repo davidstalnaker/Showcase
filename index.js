@@ -1,5 +1,4 @@
 var express = require('express');
-var connect = require('connect');
 var model = require('./model.js')('localhost');
 var controller = require('./controller.js')(model);
 require('./dateFormat.js');
