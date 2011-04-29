@@ -20,7 +20,9 @@ app.configure(function(){
 app.get('/', controller.home);
 app.get('/manage', controller.manage);
 app.get('/create', controller.createPost);
-app.post('/create', controller.postCreatePost);
+app.post('/create', controller.POST.editPost);
+app.get('/edit/:slug', controller.editPost);
+app.post('/edit/:slug', controller.POST.editPost);
 app.get('/view/:slug', controller.viewPost);
 
 exports.app = app;

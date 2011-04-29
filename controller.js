@@ -11,15 +11,17 @@ module.exports = function(model) {
 			});
 		},
 		createPost: function(req, res) {
-			res.render('createPost');
+			res.render('editPost', {post: {}});
 		},
-		postCreatePost: function(req, res) {
-			model.createPost({
-				"title": req.body.title,
-				"content": req.body.content,
-				"date": new Date()
+		editPost: function(req, res, next) {
+			model.getPost(req.params.slug, function(err, post) {
+				if(post){
+					res.render('editPost', {post: post});
+				}
+				else {
+					next();
+				}
 			});
-			res.redirect('/');
 		},
 		viewPost: function(req, res, next) {
 			model.getPost(req.params.slug, function(err, post) {
@@ -36,6 +38,25 @@ module.exports = function(model) {
 			model.getPosts(function(err, posts) {
 				res.render('manage', { posts: posts });
 			});
+		},
+		POST: {
+			editPost: function(req, res) {
+				if(req.body.slug) {
+					model.upsertPost({
+						"slug": req.body.slug,
+						"title": req.body.title,
+						"content": req.body.content
+					});
+				}
+				else {
+					model.upsertPost({
+						"title": req.body.title,
+						"content": req.body.content,
+						"date": new Date()
+					});
+				}
+				res.redirect('/');
+			},
 		}
 	};
 }

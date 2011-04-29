@@ -1,19 +1,20 @@
 <h2>Create New Post</h2>
 <p>
-	<form action="./create" method="post">
+	<form action="/create" method="post">
 		<table>
 			<tr>
 				<td class="label"><label for="title">Title:</label></td>
-				<td class="field"><input name="title" id="title" type="text" value="${title}"></td>
+				<td class="field"><input name="title" id="title" type="text" value="${post.title}"></td>
 			</tr>
 			<tr>
 				<td class="label"><label for="content">Content:</label></td>
-				<td class="field"><textarea name="content" id="content">${content}</textarea></td>
+				<td class="field"><textarea name="content" id="content">${post.content}</textarea></td>
 			</tr>
 			<tr>
 				<td class="label"></td>
 				<td class="field"><input type="submit" value="Post"></td>
 			</tr>
+			<input name="slug" type="hidden" value="${post.slug}">
 		</table>
 	</form>
 </p>

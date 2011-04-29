@@ -73,6 +73,26 @@ module.exports = function(server, port) {
 			);
 		 
 		},
+		upsertPost: function(post) {
+			step(
+				function() {
+					if(!post.slug) {
+						var slug = createSlug(post.title);
+						makeSlugUnique(slug, this);
+					}
+					else {
+						this();	
+					}
+				},
+				function(slug) {
+					if(slug) post.slug = slug;
+					db.collection('posts', this);
+				},
+				function(err, collection) {
+					collection.update({"slug": post.slug}, {$set: post}, {upsert: true});
+				}
+			);
+		},
 		getPost: function(slug, callback) {
 			step(
 				function() {
