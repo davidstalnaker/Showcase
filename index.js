@@ -1,5 +1,7 @@
 var express = require('express');
-var model = require('./model.js')('localhost');
+var model = require('./model.js')({
+    database: 'max-cms',
+});
 var controller = require('./controller.js')(model);
 require('./dateFormat.js');
 

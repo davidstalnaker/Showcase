@@ -1,7 +1,27 @@
-module.exports = function(server, port) {
-	var mongo = require('mongodb');
-	var step = require('step');
+var mongo = require('mongodb');
+var step = require('step');
+var utils = require('./utils.js');
+
+module.exports = function(settings) {
 	
+	var defaults = {
+	    database: 'cms',
+	    server: 'localhost',
+	    port: mongo.Connection.DEFAULT_PORT,
+	};
+	
+	settings = utils.combine(defaults, settings);
+	
+	var db = new mongo.Db(
+		settings.database, 
+		new mongo.Server(
+			settings.server, 
+			settings.port, 
+			{auto_reconnect: true}), 
+		{native_parser:true}
+	);
+	db.open(function() {});
+    
 	var createSlug = function(title) {
 		return title.replace(/[^A-Za-z0-9']+/g, "-").toLowerCase();
 	}
@@ -30,17 +50,6 @@ module.exports = function(server, port) {
 			}
 		);
 	}
-	
-	if(! port) port = mongo.Connection.DEFAULT_PORT;
-	var db = new mongo.Db(
-		'cms', 
-		new mongo.Server(
-			server, 
-			port, 
-			{auto_reconnect: true}), 
-		{native_parser:true}
-	);
-	db.open(function() {});
 	
 	return {
 		getPosts: function(callback) {
