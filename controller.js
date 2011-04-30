@@ -107,4 +107,3 @@ module.exports = function(model) {
 		}
 	};
 }
-

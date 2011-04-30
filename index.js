@@ -1,6 +1,6 @@
 var express = require('express');
 var mongoStore = require('connect-mongodb');
-var model = require('./model.js')('localhost');
+var model = require('./model.js')({});
 var controller = require('./controller.js')(model);
 require('./dateFormat.js');
 
