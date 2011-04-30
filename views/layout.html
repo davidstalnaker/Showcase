@@ -17,6 +17,12 @@
 	<div class="content">
 		{{html body}}
 	</div>
-	
+	<div class="footer">
+		{{if username}}
+		Hello, ${username} - <a href="/logout">Log out</a>
+		{{else}}
+		<a href="/login">Log in</a>
+		{{/if}}
+	</div>
 </body>
 </html>

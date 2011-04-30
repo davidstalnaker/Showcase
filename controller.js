@@ -7,7 +7,7 @@ module.exports = function(model) {
 				posts.forEach(function(elem, i) {
 					elem.renderedContent = markdown(elem.content, true);
 				});
-				res.render('home', { posts: posts });
+				res.render('home', { posts: posts, username: (req.session.user) ? req.session.user.username : null});
 			});
 		},
 		createPost: function(req, res) {
@@ -49,6 +49,16 @@ module.exports = function(model) {
 				res.render('manage', { posts: posts });
 			});
 		},
+		login: function(req, res, next) {
+			res.render('login');
+		},
+		logout: function(req, res, next) {
+			req.session.destroy();
+			res.render('logout');
+		},
+		register: function(req, res) {
+			res.render('register');
+		},
 		POST: {
 			editPost: function(req, res) {
 				if(req.body.slug) {
@@ -70,6 +80,29 @@ module.exports = function(model) {
 			deletePost: function(req, res) {
 				model.deletePost(req.params.slug);
 				res.redirect('/');
+			},
+			register: function(req, res) {
+				model.registerUser({
+					username: req.body.username,
+					password: req.body.password
+				},
+				function() {
+					res.redirect('/');
+				});
+			},
+			login: function(req, res) {
+				model.getUser({
+					username: req.body.username,
+					password: req.body.password
+				},
+				function(user) {
+					if(user) {
+						console.log(user);
+						req.session.user = user;
+					}
+					res.redirect('/');
+				});
+				
 			}
 		}
 	};

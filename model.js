@@ -1,6 +1,7 @@
 module.exports = function(server, port) {
 	var mongo = require('mongodb');
 	var step = require('step');
+	var bcrypt = require('bcrypt');
 	
 	var createSlug = function(title) {
 		return title.replace(/[^A-Za-z0-9']+/g, "-").toLowerCase();
@@ -117,6 +118,61 @@ module.exports = function(server, port) {
 				function(err, posts) {
 					callback(err, posts[0]);
 				}
+			);
+		},
+		registerUser: function(user, callback) {
+			step(
+				function() {
+					bcrypt.gen_salt(10, this);
+				},
+				function(err, salt) {
+					user.salt = salt;
+					bcrypt.encrypt(user.password, user.salt, this);
+				},
+				function(err, hash) {
+					user.hash = hash;
+					delete user.password;
+					db.collection('users', this);
+				},
+				function(err, collection) {
+					collection.insert(user, {safe: true}, this);
+				},
+				function(err) {
+					callback();
+				}
+			);
+		},
+		getUser: function(user, callback) {
+			var fulluser;
+			step(
+				function() {
+					db.collection('users', this);
+				},
+				function(err, collection) {
+					collection.find({username: user.username}, this);
+				},
+				function(err, cursor) {
+					cursor.toArray(this);
+				},
+				function(err, users) {
+					if(users && users.length == 1) {
+						fulluser = users[0];
+						bcrypt.encrypt(user.password, fulluser.salt, this);
+					}
+					else {
+						callback(null);
+					}
+				},
+				function(err, hash) {
+					
+					if(hash === fulluser.hash) {
+						callback(fulluser);
+					}
+					else {
+						callback(null);
+					}
+				}
+				
 			);
 		}
 	};
