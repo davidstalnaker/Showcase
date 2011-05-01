@@ -1,22 +1,29 @@
 var markdown = require('node-markdown').Markdown;
+var utils = require('./utils');
 
 module.exports = function(model) {
 	return {
+		checkSession: function(req, res, next) {
+			if(req.session && req.session.user) {
+				req.content = utils.combine(req.content, {username: req.session.user.username});
+			}
+			next();
+		},
 		home: function(req, res) {
 			model.getPosts(function(err, posts) {
 				posts.forEach(function(elem, i) {
 					elem.renderedContent = markdown(elem.content, true);
 				});
-				res.render('home', { posts: posts, username: (req.session.user) ? req.session.user.username : null});
+				res.render('home', utils.combine(req.content, {posts: posts}));
 			});
 		},
 		createPost: function(req, res) {
-			res.render('editPost', {post: {}});
+			res.render('editPost', utils.combine(req.content, {post: {}}));
 		},
 		editPost: function(req, res, next) {
 			model.getPost(req.params.slug, function(err, post) {
 				if(post){
-					res.render('editPost', {post: post});
+					res.render('editPost', utils.combine(req.content, {post: post}));
 				}
 				else {
 					next();
@@ -26,7 +33,7 @@ module.exports = function(model) {
 		deletePost: function(req, res, next) {
 			model.getPost(req.params.slug, function(err, post) {
 				if(post){
-					res.render('deletePost', {post: post});
+					res.render('deletePost', utils.combine(req.content, {post: post}));
 				}
 				else {
 					next();
@@ -37,7 +44,7 @@ module.exports = function(model) {
 			model.getPost(req.params.slug, function(err, post) {
 				if(post){
 					post.renderedContent = markdown(post.content, true);
-					res.render('viewPost', {post: post});
+					res.render('viewPost', utils.combine(req.content, {post: post}));
 				}
 				else {
 					next();
@@ -46,18 +53,18 @@ module.exports = function(model) {
 		},
 		manage: function(req, res) {
 			model.getPosts(function(err, posts) {
-				res.render('manage', { posts: posts });
+				res.render('manage', utils.combine(req.content, {posts: posts}));
 			});
 		},
 		login: function(req, res, next) {
-			res.render('login');
+			res.render('login', req.content);
 		},
 		logout: function(req, res, next) {
 			req.session.destroy();
 			res.render('logout');
 		},
 		register: function(req, res) {
-			res.render('register');
+			res.render('register', req.content);
 		},
 		POST: {
 			editPost: function(req, res) {
@@ -97,7 +104,6 @@ module.exports = function(model) {
 				},
 				function(user) {
 					if(user) {
-						console.log(user);
 						req.session.user = user;
 					}
 					res.redirect('/');

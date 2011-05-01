@@ -26,7 +26,7 @@ app.configure(function(){
 	
 	app.use(express.static(__dirname + '/public'));
 });
-
+app.get('*', controller.checkSession);
 app.get('/', controller.home);
 app.get('/login', controller.login);
 app.post('/login', controller.POST.login);
