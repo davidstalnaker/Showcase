@@ -1,3 +1,5 @@
 *.tmproj
 .monitor
+/example.js
+nodemon-ignore
 
