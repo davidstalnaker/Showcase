@@ -1,7 +1,7 @@
-var cms = require('../lib/index');
-var app = cms.app;
-var blog = cms.blog({}, {});
-var auth = cms.auth({}, {});
+var showcase = require('../lib/showcase');
+var app = showcase.app;
+var blog = showcase.blog({}, {});
+var auth = showcase.auth({}, {});
 
 app.set('view options', {
 	layout: __dirname + '/views/layout'
