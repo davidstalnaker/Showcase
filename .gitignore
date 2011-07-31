@@ -2,4 +2,5 @@
 .monitor
 /example.js
 nodemon-ignore
-
+data/
+node_modules/
