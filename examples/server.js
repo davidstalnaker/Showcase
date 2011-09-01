@@ -1,8 +1,5 @@
-var showcase = require('../lib/showcase')();
-var app = showcase.server;
-
-app.set('view options', {
-	layout: __dirname + '/views/layout'
+var showcase = require('../lib/showcase')({
+	dir: __dirname,
+	port: 9001,
 });
-
-app.listen(9001);
+showcase.start();
