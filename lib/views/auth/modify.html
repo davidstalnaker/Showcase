@@ -1,0 +1,23 @@
+<h2>Edit Account Info</h2>
+<p>
+	<form action="/account" method="post">
+		<table>
+			<tr>
+				<td class="label"><label for="username">Username:</label></td>
+				<td class="field"><input name="username" id="username" type="text" value="${username}"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="oldPassword">Old Password:</label></td>
+				<td class="field"><input name="oldPassword" id="oldPassword" type="password"></td>
+			</tr>
+			<tr>
+				<td class="label"><label for="newPassword">New Password:</label></td>
+				<td class="field"><input name="newPassword" id="newPassword" type="password"></td>
+			</tr>
+			<tr>
+				<td class="label"></td>
+				<td class="field"><input type="submit" value="Save"></td>
+			</tr>
+		</table>
+	</form>
+</p>
