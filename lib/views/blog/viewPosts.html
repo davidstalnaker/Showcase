@@ -1,7 +1,7 @@
 {{each(i, post) posts}}
 <h3>${post.title}</h3>
 <p>${post.date.format('mmmm d, yyyy')}</p>
-<p>{{html post.renderedContent}}</p>
+{{html post.renderedContent}}
 <p class="more"><a href="view/${post.slug}">More...</a></p>
 {{/each}}
 <a href="./create">Create new post</a>
