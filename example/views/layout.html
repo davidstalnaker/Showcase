@@ -18,8 +18,8 @@
 		{{html body}}
 	</div>
 	<div class="footer">
-		{{if username}}
-		Hello, ${username} - <a href="/logout">Log out</a>
+		{{if user}}
+		Hello, ${user.username} - <a href="/logout">Log out</a>
 		{{else}}
 		<a href="/login">Log in</a>
 		{{/if}}
