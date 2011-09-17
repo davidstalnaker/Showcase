@@ -1,7 +1,6 @@
 {{each(i, post) posts}}
-<h3>${post.title}</h3>
+<h3><a href="posts/${post.slug}">${post.title}</a></h3>
 <p>${post.date.format('mmmm d, yyyy')}</p>
 {{html post.renderedContent}}
-<p class="more"><a href="posts/${post.slug}">More...</a></p>
 {{/each}}
-<a href="./create">Create new post</a>
+{{if user}}<a href="./create">Create new post</a>{{/if}}
