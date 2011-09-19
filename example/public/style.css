@@ -126,7 +126,15 @@ body {
 		background-color:#141a35;
 		color:#ffffff;
 	}
-	
+
+	.content h3 a {
+		color:#ffffff;
+	}
+
+	.content h3 a:hover {
+		color:#ff3333;
+	}
+
 /******** Footer ********/	
 
 .footer {
