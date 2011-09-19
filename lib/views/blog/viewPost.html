@@ -1,3 +1,9 @@
 <h3>${post.title}</h3>
+{{if user}}
+<p>
+    <a href="/edit/${post.slug}">edit</a> |
+    <a href="/delete/${post.slug}">delete</a>
+</p>
+{{/if}}
 <p>${post.date.format('mmmm d, yyyy')}</p>
 {{html post.renderedContent}}
