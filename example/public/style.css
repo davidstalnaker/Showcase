@@ -9,22 +9,22 @@
 		font-size:3.5em;
 		font-weight:100;
 	}
-	
+
 	.header ul {
 		font-size:2em;
 		font-weight:100;
 	}
-	
+
 	.content h2 {
 		font-weight:100;
 		font-size:2.5em;
 	}
-	
+
 	.content h3 {
 		font-weight:100;
 		font-size:1.75em;
 	}
-	
+
 	input[type=text], input[type=password], .label {
 		font-size:1.25em;
 	}
@@ -54,7 +54,7 @@ body {
 	.header h1 {
 		margin:0;
 	}
-	
+
 		.header h1 a {
 			color: inherit;
 			text-decoration: inherit;
@@ -69,30 +69,30 @@ body {
 		display:inline-block;
 		margin: 0;
 	}
-	
+
 	.header li a {
 		color:#ffffff;
 		text-decoration:none;
 		margin: 0 .25em;
 		padding: .25em;
 	}
-	
+
 		.header li.wordsColor a {
 			color:#ff3333;
 		}
-	
+
 		.header li.wordsColor a:hover {
 			color:#ff3333;
 		}
-		
+
 		.header li.projectsColor a:hover {
 			color:#33ff33;
 		}
-		
+
 		.header li.aboutColor a:hover {
 			color: #ffff33;
 		}
-	
+
 /******** Content ********/
 .content {
 	max-width:40em;
@@ -108,12 +108,12 @@ body {
 		color: #ff3333;
 		text-decoration:none;
 	}
-	
+
 	.content a:hover {
 		color: #ff3333;
 		text-decoration: underline;
 	}
-	
+
 	.content h2 {
 		margin:0;
 	}
@@ -148,12 +148,12 @@ body {
 		color: #ff3333;
 		text-decoration: none;
 	}
-	
+
 	.footer a:hover {
 		color: #ff3333;
 		text-decoration: underline;
 	}
-	
+
 /******** Form ********/
 
 table {
@@ -164,7 +164,7 @@ table {
 		width:100%;
 		border: 1px solid #ddd;
 	}
-	
+
 	textarea {
 		height:20em;
 	}
